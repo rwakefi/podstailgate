@@ -38,7 +38,7 @@
   "sponsorsLabel": "Proudly sponsored by",
   "sponsors": [
     { "name": "PODS", "image": "assets/img/sponsors/pods.png", "url": "" },
-    { "name": "Northrock Builders", "image": "assets/img/sponsors/northrock.png", "url": "" },
+    { "name": "Northrock Builders", "image": "assets/img/sponsors/northrock.png", "url": "https://www.northrockbuilders.com" },
     { "name": "Moon Ridge", "image": "assets/img/sponsors/moon-ridge.png", "url": "" }
   ],
   "social": []
