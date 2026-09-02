@@ -338,7 +338,19 @@ h3 {
 .gamecard__preview {
   color: var(--muted);
   max-width: 620px;
-  margin: 8px auto 0;
+  margin: 10px auto 4px;
+  text-align: left;
+}
+
+.gamecard__preview p + p {
+  margin-top: 12px;
+}
+
+.gamecard__preview p:first-child {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.05em;
+  color: var(--ink);
 }
 
 .gamecard__body .btn {

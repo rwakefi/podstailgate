@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "note": "Edit this file to add games. Each game: date (YYYY-MM-DD), opponent, home (true/false), time (kickoff or tailgate window, or \"TBD\"), menu, chef (optional), status (upcoming|final), result (optional, e.g. \"W 24-17\"), preview (optional short paragraph shown on the home page when this is the next game), gallery (optional slug that matches an entry in galleries.json).",
+  "note": "Edit this file to add games. Each game: date (YYYY-MM-DD), opponent, home (true/false), time (kickoff or tailgate window, or \"TBD\"), menu, chef (optional), status (upcoming|final), result (optional, e.g. \"W 24-17\"), preview (optional; shown on the home page when this is the next game — a single string, or an array of strings for multiple paragraphs; the first paragraph renders as a centered bold lead-in), gallery (optional slug that matches an entry in galleries.json).",
   "games": [
     {
       "date": "2026-09-05",
@@ -10,7 +10,13 @@
       "menu": "Shilo's Tacos",
       "status": "upcoming",
       "result": "",
-      "preview": "Season opener in the Gardens. Come hungry — Shilo's Tacos to kick off the year.",
+      "preview": [
+        "Woo Pig, meet the Lions.",
+        "Football's back, and the Hogs open the Ryan Silverfield era against a North Alabama team the Razorbacks have somehow never played before. Vegas has Arkansas favored by about 40.....",
+        "Credit where it's due: North Alabama is the only school in America with a live lion living on campus, they won three straight Division II national titles back in the '90s, and this fall they finally moved into a brand-new stadium in Florence after 76 years in the old one. Respect. That said — they went 2-10 last year, they're breaking in new coordinators on both sides, and Silverfield already knows their defensive line by heart from his Memphis days.",
+        "Fun side plot: Bobby Petrino is calling plays at North Carolina now, dropped his opener, and got flagged 11 times — tape Silverfield reportedly showed the team as a \"do NOT do this\" reel. Hog fans will resist the urge to make a motorcycle joke. Mostly.",
+        "Kickoff 3:15, SEC Network. Menu's Shilo's Tacos. Bring cash, bring an appetite, and let's start 1-0."
+      ],
       "gallery": ""
     },
     {

@@ -71,6 +71,16 @@ function renderAnnounce(site, schedule) {
   bar.textContent = text;
 }
 
+/* preview: a string or an array of paragraphs */
+function renderPreview(preview) {
+  if (!preview) return "";
+  const paras = Array.isArray(preview) ? preview : [preview];
+  return `<div class="gamecard__preview">${paras
+    .filter(Boolean)
+    .map((p) => `<p>${p}</p>`)
+    .join("")}</div>`;
+}
+
 /* ---------- this-week game card (home) ---------- */
 function renderThisWeek(site, schedule) {
   const mount = el("this-week");
@@ -107,7 +117,7 @@ function renderThisWeek(site, schedule) {
       <div class="gamecard__body">
         <p class="gamecard__matchup">Arkansas <em>vs.</em> ${ng.opponent}</p>
         ${ng.menu ? `<p class="gamecard__menu">Menu: ${ng.menu}${ng.chef ? ` <span>by ${ng.chef}</span>` : ""}</p>` : ""}
-        ${ng.preview ? `<p class="gamecard__preview">${ng.preview}</p>` : ""}
+        ${renderPreview(ng.preview)}
         ${loc ? `<p class="muted">${loc}</p>` : ""}
         <a class="btn" href="schedule.html">Full schedule &amp; menus</a>
         ${vid}
