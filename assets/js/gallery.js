@@ -1,0 +1,90 @@
+/* PODS Tailgate — photo galleries + lightbox */
+
+(async function () {
+  const mount = document.getElementById("galleries");
+  const navMount = document.getElementById("gallery-nav");
+  if (!mount) return;
+
+  let data;
+  try {
+    const res = await fetch("data/galleries.json", { cache: "no-cache" });
+    data = await res.json();
+  } catch (err) {
+    console.error("[PODS] gallery load failed", err);
+    mount.innerHTML = '<p class="muted">Photos are taking a break. Check back soon.</p>';
+    return;
+  }
+
+  const galleries = (data.galleries || []).filter((g) => (g.photos || []).length);
+  const flat = []; // {src, group} for lightbox navigation
+
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const fmt = (s) => {
+    if (!s) return "";
+    const [y, m, d] = s.split("-").map(Number);
+    return `${MONTHS[(m || 1) - 1]} ${d}, ${y}`;
+  };
+
+  if (navMount) {
+    navMount.innerHTML = galleries
+      .map((g) => `<a href="#${g.slug}">${g.title}</a>`)
+      .join("");
+  }
+
+  mount.innerHTML = galleries
+    .map((g) => {
+      const imgs = g.photos
+        .map((src) => {
+          const idx = flat.push({ src }) - 1;
+          return `<img src="${src}" alt="" loading="lazy" data-idx="${idx}">`;
+        })
+        .join("");
+      return `
+        <section class="gallery-group" id="${g.slug}">
+          <h2>${g.title}</h2>
+          ${g.date || g.blurb ? `<p class="muted">${[fmt(g.date), g.blurb].filter(Boolean).join(" &middot; ")}</p>` : ""}
+          <div class="gallery">${imgs}</div>
+        </section>`;
+    })
+    .join("");
+
+  /* lightbox */
+  const box = document.getElementById("lightbox");
+  const boxImg = document.getElementById("lightbox-img");
+  let current = -1;
+
+  function show(i) {
+    if (i < 0 || i >= flat.length) return;
+    current = i;
+    boxImg.src = flat[i].src;
+    box.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  function close() {
+    box.hidden = true;
+    boxImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  mount.addEventListener("click", (e) => {
+    const t = e.target;
+    if (t.tagName === "IMG" && t.dataset.idx) show(Number(t.dataset.idx));
+  });
+  box.addEventListener("click", (e) => {
+    if (e.target === box || e.target.classList.contains("lightbox__close")) close();
+    if (e.target.classList.contains("lightbox__prev")) show(current - 1);
+    if (e.target.classList.contains("lightbox__next")) show(current + 1);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (box.hidden) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(current - 1);
+    if (e.key === "ArrowRight") show(current + 1);
+  });
+
+  /* jump to hash target after render */
+  if (location.hash) {
+    const target = document.getElementById(location.hash.slice(1));
+    if (target) target.scrollIntoView();
+  }
+})();

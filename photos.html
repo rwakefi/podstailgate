@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Game Day Photos — PODS Tailgate</title>
+  <meta name="description" content="Photos from PODS Tailgate game days in the Razorback Gardens.">
+  <link rel="icon" href="assets/img/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-needs="site">
+  <div class="announce" id="announce"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.webp" alt="PODS Tailgate logo">
+      </a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="schedule.html">Schedule/Menu</a>
+        <a href="photos.html" aria-current="page">Photos</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="sponsorbar" id="sponsorbar"></div>
+
+  <main>
+    <section class="page-hero">
+      <h1>Game Day Photos</h1>
+      <p>Got a good one? Send it our way and we'll add it to the gallery.</p>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <nav class="gallery-nav" id="gallery-nav"></nav>
+        <div id="galleries"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <h3>PODS Tailgate</h3>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule/Menu</a>
+      <a href="photos.html">Photos</a>
+      <a href="about.html">About</a>
+    </nav>
+    <p>Go Hogs!</p>
+    <p>&copy; <span data-year></span> PODS Tailgate. All rights reserved.</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" aria-label="Close">&times;</button>
+    <button class="lightbox__prev" aria-label="Previous">&#8249;</button>
+    <button class="lightbox__next" aria-label="Next">&#8250;</button>
+    <img id="lightbox-img" alt="Game day photo">
+  </div>
+
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/gallery.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{
+  "name": "PODS Tailgate",
+  "tagline": "The ultimate Razorback tailgate in the Gardens.",
+  "domain": "podstailgate.com",
+  "hero": {
+    "eyebrow": "Razorback Gardens · Fayetteville",
+    "title": "Woo Pig. Let's Eat.",
+    "text": "Awesome people, unbeatable food, cold drinks, and Razorback pride like no other. Every home game, in the Gardens."
+  },
+  "announcement": "",
+  "announcementFallbackFromSchedule": true,
+  "location": {
+    "short": "Razorback Gardens, directly in front of the Bathroom Pavilion.",
+    "long": "We are in the Gardens directly in front of the Bathroom Pavilion. If you can find the Pavilion, you will find us.",
+    "mapImage": "assets/img/tailgate-map.png",
+    "mapLink": "https://maps.google.com/?q=Razorback+Gardens+Fayetteville+AR"
+  },
+  "parking": {
+    "withPass": "Lot 320-322 (used to be Lot 56).",
+    "withoutPass": "Fayetteville High School lot — usually about $20, not a far walk, and a great cause.",
+    "image": ""
+  },
+  "venmo": {
+    "handle": "@ben-pierce-23",
+    "name": "Ben Pierce",
+    "url": "https://account.venmo.com/u/ben-pierce-23",
+    "qr": "assets/img/venmo-qr.png",
+    "suggested": "Give what feels right — about $10 an adult if you hang out for a while. Kids are always on us. All proceeds fund the tailgate."
+  },
+  "video": {
+    "youtubeId": "BFWosB_1hZc",
+    "title": "PODS Tailgate"
+  },
+  "award": {
+    "image": "assets/img/tailgate-of-the-week.webp",
+    "caption": "Tailgate of the Week"
+  },
+  "sponsorsLabel": "Proudly sponsored by",
+  "sponsors": [
+    { "name": "PODS", "image": "assets/img/sponsors/pods.png", "url": "" },
+    { "name": "Northrock Builders", "image": "assets/img/sponsors/northrock.png", "url": "" },
+    { "name": "Moon Ridge", "image": "assets/img/sponsors/moon-ridge.png", "url": "" }
+  ],
+  "social": []
+}

@@ -1,0 +1,26 @@
+{
+  "note": "Plain FAQ list, shown in this order on both the home page and the About page. \"image\" is optional (path relative to site root).",
+  "items": [
+    {
+      "q": "Where exactly are you located?",
+      "a": "We are in the Gardens directly in front of the Bathroom Pavilion. If you can find the Pavilion, you will find us.",
+      "image": "assets/img/tailgate-map.png"
+    },
+    {
+      "q": "What can we bring?",
+      "a": "While we will never turn away food, the easiest and most effective way to help is to Venmo Ben Pierce (@ben-pierce-23) — or hand him some cash. Give what feels right (about $10 an adult if you hang out for a while). Kids are always on us. All proceeds go to funding the tailgate."
+    },
+    {
+      "q": "What's the food?",
+      "a": "We have a special menu for every game. You're gonna love it. Check the Schedule page for what's cooking each week."
+    },
+    {
+      "q": "Alcohol and drinks?",
+      "a": "We'll have plenty of beer and some special concoctions. Want to get fancy? BYOB. Please drink responsibly — you must be 21 to consume alcohol. We'll also have sodas and water to keep everyone hydrated. Please finish your drink before opening another; we find a million half-full cans and it's a huge waste. Encourage your kids to do the same."
+    },
+    {
+      "q": "Where's the best place to park?",
+      "a": "With a parking pass: Lot 320-322 (used to be Lot 56). Without a pass: the Fayetteville High School lot — usually about $20, not a far walk, and a great cause."
+    }
+  ]
+}

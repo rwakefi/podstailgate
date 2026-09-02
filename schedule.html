@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schedule &amp; Menus — PODS Tailgate</title>
+  <meta name="description" content="The PODS Tailgate game-by-game schedule and menu for the season.">
+  <link rel="icon" href="assets/img/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-needs="site schedule">
+  <div class="announce" id="announce"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.webp" alt="PODS Tailgate logo">
+      </a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="schedule.html" aria-current="page">Schedule/Menu</a>
+        <a href="photos.html">Photos</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="sponsorbar" id="sponsorbar"></div>
+
+  <main>
+    <section class="page-hero">
+      <h1>Schedule &amp; Menus</h1>
+      <p>A special menu for every home game. Here's what's cooking.</p>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="schedule-list" id="schedule-list"></div>
+        <p class="muted" style="margin-top:24px">Menus can change week to week — check back before game day, or watch the banner at the top of the site.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <h3>PODS Tailgate</h3>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule/Menu</a>
+      <a href="photos.html">Photos</a>
+      <a href="about.html">About</a>
+    </nav>
+    <p>Go Hogs!</p>
+    <p>&copy; <span data-year></span> PODS Tailgate. All rights reserved.</p>
+  </footer>
+
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
