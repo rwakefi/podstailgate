@@ -333,6 +333,10 @@ h3 {
   justify-self: center;
 }
 
+.gamecard__body .video-wrap {
+  margin-top: 20px;
+}
+
 /* generic panels */
 .grid-2 {
   display: grid;

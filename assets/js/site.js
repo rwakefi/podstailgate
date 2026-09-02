@@ -90,6 +90,14 @@ function renderThisWeek(site, schedule) {
   const homeAway = ng.home ? "Home — Razorback Gardens" : "Away";
   const loc = ng.home ? site.location.short : "";
   const when = [fmtDate(ng.date), ng.time && ng.time !== "TBD" ? ng.time : ""].filter(Boolean).join(" · ");
+  const vid = site.video && site.video.youtubeId
+    ? `<div class="video-wrap">
+         <iframe src="https://www.youtube-nocookie.com/embed/${site.video.youtubeId}"
+           title="${site.video.title || "PODS Tailgate"}" loading="lazy"
+           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+           allowfullscreen></iframe>
+       </div>`
+    : "";
   mount.innerHTML = `
     <div class="gamecard">
       <div class="gamecard__top">
@@ -102,6 +110,7 @@ function renderThisWeek(site, schedule) {
         ${ng.preview ? `<p class="gamecard__preview">${ng.preview}</p>` : ""}
         ${loc ? `<p class="muted">${loc}</p>` : ""}
         <a class="btn" href="schedule.html">Full schedule &amp; menus</a>
+        ${vid}
       </div>
     </div>`;
 }
