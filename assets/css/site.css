@@ -181,7 +181,7 @@ h3 {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 12px 0;
+  padding: 8px 0;
 }
 
 .brand {
@@ -196,7 +196,7 @@ h3 {
 }
 
 .brand img {
-  height: 48px;
+  height: 80px;
   width: auto;
 }
 
@@ -783,6 +783,10 @@ h3 {
 @media (max-width: 760px) {
   .site-header__inner {
     flex-wrap: wrap;
+  }
+
+  .brand img {
+    height: 64px;
   }
 
   .nav {
