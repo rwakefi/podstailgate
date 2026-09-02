@@ -275,9 +275,21 @@ function renderSponsors(site) {
       ? `<img src="${s.image}" alt="${safe}" loading="lazy"
            onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'sponsorbar__name',textContent:'${safe}'}))">`
       : `<span class="sponsorbar__name">${safe}</span>`;
-    return s.url
-      ? `<a class="sponsorbar__item" href="${s.url}" target="_blank" rel="noopener">${inner}</a>`
-      : `<span class="sponsorbar__item">${inner}</span>`;
+    const logo = s.url
+      ? `<a class="sponsorbar__logo-link" href="${s.url}" target="_blank" rel="noopener">${inner}</a>`
+      : inner;
+    const handle = (s.instagram || "").replace(/^@/, "").replace(/[^A-Za-z0-9._]/g, "");
+    const ig = handle
+      ? `<a class="sponsorbar__ig" href="https://instagram.com/${handle}" target="_blank" rel="noopener">
+           <svg class="sponsorbar__ig-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+             <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"></rect>
+             <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"></circle>
+             <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"></circle>
+           </svg>
+           Follow @${handle}
+         </a>`
+      : "";
+    return `<div class="sponsorbar__item">${logo}${ig}</div>`;
   };
   mount.innerHTML = `
     ${site.sponsorsLabel ? `<span class="sponsorbar__label">${site.sponsorsLabel}</span>` : ""}

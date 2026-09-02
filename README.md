@@ -19,11 +19,14 @@ Pages redeploys in about a minute.
 ### Sponsor bar
 
 The strip under the header on every page comes from `sponsors` in `data/site.json`.
-Each entry is `{ "name", "image", "url" }`:
+Each entry is `{ "name", "image", "url", "instagram" }`:
 
 - `image` is a path like `assets/img/sponsors/pods.png`. If the file is missing
   or fails to load, the sponsor's `name` shows as text instead.
 - `url` is optional; set it to make the logo a link.
+- `instagram` is optional — a handle with or without the leading `@` (e.g.
+  `"moonridgeco"`). When set, a small "Follow @handle" link appears under that
+  sponsor's logo, linking to `instagram.com/<handle>`. Omit it to show no line.
 - Logos render 64px tall (48px on phones) — use a transparent or white-background PNG, roughly 3:1 to 5:1 wide.
 
 ### Add or update a game

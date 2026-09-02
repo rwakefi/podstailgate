@@ -700,12 +700,20 @@ h3 {
 }
 
 .sponsorbar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sponsorbar__logo-link {
   display: inline-flex;
   align-items: center;
+  line-height: 0;
   transition: transform 0.15s ease;
 }
 
-.sponsorbar__item:hover {
+.sponsorbar__logo-link:hover {
   transform: translateY(-2px);
   text-decoration: none;
 }
@@ -726,6 +734,29 @@ h3 {
   color: var(--ink);
 }
 
+.sponsorbar__ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.sponsorbar__ig:hover {
+  color: var(--cardinal);
+  text-decoration: none;
+}
+
+.sponsorbar__ig-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 @media (max-width: 620px) {
   .sponsorbar__logos {
     gap: 18px 28px;
@@ -738,6 +769,16 @@ h3 {
 
   .sponsorbar__name {
     font-size: 18px;
+  }
+
+  .sponsorbar__ig {
+    font-size: 10.5px;
+    gap: 4px;
+  }
+
+  .sponsorbar__ig-icon {
+    width: 12px;
+    height: 12px;
   }
 }
 
