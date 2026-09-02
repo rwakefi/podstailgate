@@ -209,12 +209,24 @@ function renderSupport(site) {
   const mount = el("support");
   if (!mount) return;
   const v = site.venmo;
+  const a = site.award || {};
+  const badge = a.image
+    ? `<figure class="support-badge">
+         <img src="${a.image}" alt="${a.caption || "Award badge"}" loading="lazy">
+         ${a.caption ? `<figcaption>${a.caption}</figcaption>` : ""}
+       </figure>`
+    : "";
   mount.innerHTML = `
-    <p class="eyebrow">Support the Tailgate</p>
-    <h2 class="section__title">Want to <span>Chip In?</span></h2>
-    <p class="muted" style="max-width:620px;margin-inline:auto">${v.suggested}</p>
-    ${v.qr ? `<img class="venmo-qr" src="${v.qr}" alt="Venmo QR code for ${v.handle}" loading="lazy">` : ""}
-    <p style="margin-top:18px"><a class="btn" href="${v.url}" target="_blank" rel="noopener">Venmo ${v.handle}</a></p>`;
+    <div class="support-layout">
+      ${badge}
+      <div class="support-main">
+        <p class="eyebrow">Support the Tailgate</p>
+        <h2 class="section__title">Want to <span>Chip In?</span></h2>
+        <p class="muted" style="max-width:520px;margin-inline:auto">${v.suggested}</p>
+        ${v.qr ? `<img class="venmo-qr" src="${v.qr}" alt="Venmo QR code for ${v.handle}" loading="lazy">` : ""}
+        <p style="margin-top:18px"><a class="btn" href="${v.url}" target="_blank" rel="noopener">Venmo ${v.handle}</a></p>
+      </div>
+    </div>`;
 }
 
 /* ---------- sponsor bar (site-wide, under header) ---------- */
@@ -254,15 +266,6 @@ function renderVideo(site) {
     </div>`;
 }
 
-/* ---------- award ---------- */
-function renderAward(site) {
-  const mount = el("award");
-  if (!mount || !site.award || !site.award.image) return;
-  mount.innerHTML = `
-    <img src="${site.award.image}" alt="${site.award.caption || ""}" loading="lazy">
-    <p class="muted">${site.award.caption || ""}</p>`;
-}
-
 /* ---------- boot ---------- */
 (async function boot() {
   initNav();
@@ -286,7 +289,6 @@ function renderAward(site) {
       renderSupport(site);
       renderSponsors(site);
       renderVideo(site);
-      renderAward(site);
     }
     if (schedule) renderSchedule(schedule);
     if (faq) renderFAQ(faq);

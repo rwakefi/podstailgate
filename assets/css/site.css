@@ -645,13 +645,46 @@ h3 {
   border: 1px solid var(--line);
 }
 
-.award {
-  text-align: center;
+/* support section: badge beside the "Want to Chip In?" content */
+.support-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
 }
 
-.award img {
-  width: min(240px, 60%);
-  margin: 18px auto 0;
+.support-main {
+  max-width: 560px;
+}
+
+.support-badge {
+  flex-shrink: 0;
+  width: 150px;
+}
+
+.support-badge img {
+  width: 150px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.support-badge figcaption {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+@media (max-width: 620px) {
+  .support-badge,
+  .support-badge img {
+    width: 120px;
+  }
 }
 
 /* photos / galleries */
