@@ -200,8 +200,8 @@ function renderSupport(site) {
   if (!mount) return;
   const v = site.venmo;
   mount.innerHTML = `
-    <p class="eyebrow">Chip In</p>
-    <h2 class="section__title">Help us <span>feed the Gardens</span></h2>
+    <p class="eyebrow">Support the Tailgate</p>
+    <h2 class="section__title">Want to <span>Chip In?</span></h2>
     <p class="muted" style="max-width:620px;margin-inline:auto">${v.suggested}</p>
     ${v.qr ? `<img class="venmo-qr" src="${v.qr}" alt="Venmo QR code for ${v.handle}" loading="lazy">` : ""}
     <p style="margin-top:18px"><a class="btn" href="${v.url}" target="_blank" rel="noopener">Venmo ${v.handle}</a></p>`;
