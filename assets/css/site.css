@@ -14,6 +14,7 @@
   --shadow: 0 18px 40px -22px rgba(23, 21, 15, 0.45);
   --font-display: "Oswald", "Arial Narrow", sans-serif;
   --font-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --font-script: "Caveat", "Segoe Script", "Comic Sans MS", cursive;
 }
 
 *,
@@ -208,6 +209,18 @@ h3 {
   letter-spacing: 0.04em;
 }
 
+.header-quote {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  font-family: var(--font-script);
+  font-weight: 700;
+  font-size: clamp(21px, 3vw, 32px);
+  line-height: 1.05;
+  color: var(--gold);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}
+
 .nav {
   display: flex;
   gap: 26px;
@@ -368,6 +381,23 @@ h3 {
   gap: 36px;
   grid-template-columns: 1fr 1fr;
   align-items: start;
+}
+
+/* stacked, centered card column (Find Our Tailgate) */
+.logistics-stack {
+  display: grid;
+  gap: 20px;
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+.logistics-stack .card {
+  text-align: center;
+}
+
+.logistics-stack .card img {
+  margin-inline: auto;
+  width: min(420px, 100%);
 }
 
 .card {
@@ -607,8 +637,8 @@ h3 {
 }
 
 .venmo-qr {
-  width: min(240px, 70%);
-  margin: 20px auto 0;
+  width: min(170px, 55%);
+  margin: 18px auto 0;
   border-radius: 12px;
   background: #fff;
   padding: 8px;

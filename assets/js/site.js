@@ -191,16 +191,16 @@ function renderLogistics(site) {
   if (!mount) return;
   mount.innerHTML = `
     <div class="card stack">
-      <h3>Where we set up</h3>
-      <p>${site.location.long}</p>
-      <img src="${site.location.mapImage}" alt="Map of the PODS tailgate in the Razorback Gardens" loading="lazy">
-      <p><a class="btn btn--ghost" href="${site.location.mapLink}" target="_blank" rel="noopener">Open in Maps</a></p>
-    </div>
-    <div class="card stack">
       <h3>Parking</h3>
       <p><b>With a pass:</b> ${site.parking.withPass}</p>
       <p><b>Without a pass:</b> ${site.parking.withoutPass}</p>
       ${site.parking.image ? `<img src="${site.parking.image}" alt="Parking map" loading="lazy">` : ""}
+    </div>
+    <div class="card stack">
+      <h3>Where we set up</h3>
+      <p>${site.location.long}</p>
+      <img src="${site.location.mapImage}" alt="Map of the PODS tailgate in the Razorback Gardens" loading="lazy">
+      <p><a class="btn btn--ghost" href="${site.location.mapLink}" target="_blank" rel="noopener">Open in Maps</a></p>
     </div>`;
 }
 
