@@ -34,9 +34,9 @@
   mount.innerHTML = galleries
     .map((g) => {
       const imgs = g.photos
-        .map((src) => {
-          const idx = flat.push({ src }) - 1;
-          return `<img src="${src}" alt="" loading="lazy" data-idx="${idx}">`;
+        .map((src, i) => {
+          const idx = flat.push({ src, alt: `${g.title} — photo ${i + 1}` }) - 1;
+          return `<img src="${src}" alt="${g.title} — photo ${i + 1}" loading="lazy" data-idx="${idx}" tabindex="0" role="button">`;
         })
         .join("");
       return `
@@ -51,24 +51,40 @@
   /* lightbox */
   const box = document.getElementById("lightbox");
   const boxImg = document.getElementById("lightbox-img");
+  const closeBtn = box.querySelector(".lightbox__close");
   let current = -1;
+  let opener = null; // element to return focus to
 
   function show(i) {
     if (i < 0 || i >= flat.length) return;
     current = i;
     boxImg.src = flat[i].src;
-    box.hidden = false;
-    document.body.style.overflow = "hidden";
+    boxImg.alt = flat[i].alt || "Game day photo";
+    if (box.hidden) {
+      opener = document.activeElement;
+      box.hidden = false;
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+    }
   }
   function close() {
     box.hidden = true;
     boxImg.src = "";
     document.body.style.overflow = "";
+    if (opener && opener.focus) opener.focus();
+    opener = null;
   }
 
   mount.addEventListener("click", (e) => {
     const t = e.target;
     if (t.tagName === "IMG" && t.dataset.idx) show(Number(t.dataset.idx));
+  });
+  mount.addEventListener("keydown", (e) => {
+    const t = e.target;
+    if ((e.key === "Enter" || e.key === " ") && t.tagName === "IMG" && t.dataset.idx) {
+      e.preventDefault();
+      show(Number(t.dataset.idx));
+    }
   });
   box.addEventListener("click", (e) => {
     if (e.target === box || e.target.classList.contains("lightbox__close")) close();

@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9d2235">
   <title>PODS Tailgate — The ultimate Razorback tailgate in the Gardens</title>
   <meta name="description" content="PODS Tailgate: game-day food, drinks, and Razorback pride in the Razorback Gardens, in front of the Bathroom Pavilion. Find us, see the menu, chip in.">
   <link rel="icon" href="assets/img/logo.webp">
   <meta property="og:title" content="PODS Tailgate">
   <meta property="og:description" content="The ultimate Razorback tailgate in the Gardens.">
-  <meta property="og:image" content="assets/img/tailgate-of-the-week.webp">
+  <meta property="og:image" content="https://podstailgate.com/assets/img/tailgate-of-the-week.webp">
+  <meta property="og:url" content="https://podstailgate.com/">
   <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Caveat:wght@600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
@@ -24,8 +27,8 @@
         <img src="assets/img/logo.webp" alt="PODS Tailgate logo">
       </a>
       <p class="header-quote">&ldquo;We Never Lose a Tailgate.&rdquo;</p>
-      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
-      <nav class="nav">
+      <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">&#9776;</button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
         <a href="index.html" aria-current="page">Home</a>
         <a href="schedule.html">Schedule/Menu</a>
         <a href="photos.html">Photos</a>
@@ -43,7 +46,7 @@
       <p data-hero="text">Awesome people, unbeatable food, cold drinks, and Razorback pride like no other. Every home game, in the Gardens.</p>
       <div class="hero__cta">
         <a class="btn btn--light" href="schedule.html">This week's menu</a>
-        <a class="btn btn--ghost" href="#find-us" style="color:#fff;border-color:#fff">Find our tailgate</a>
+        <a class="btn btn--ghost-light" href="#find-us">Find our tailgate</a>
       </div>
     </section>
 
@@ -60,7 +63,7 @@
       </div>
     </section>
 
-    <section class="section section--tight" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <section class="section section--tight section--paper">
       <div class="wrap" id="support" style="text-align:center"></div>
     </section>
 
@@ -75,7 +78,7 @@
 
   <footer class="site-footer">
     <h3>PODS Tailgate</h3>
-    <nav>
+    <nav aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="schedule.html">Schedule/Menu</a>
       <a href="photos.html">Photos</a>

@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9d2235">
   <title>About &amp; FAQs — PODS Tailgate</title>
   <meta name="description" content="Who we are, where to find us, what to bring, and every PODS Tailgate FAQ.">
   <link rel="icon" href="assets/img/logo.webp">
@@ -11,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Caveat:wght@600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
-<body data-needs="site faq">
+<body data-needs="site schedule faq">
   <div class="announce" id="announce"></div>
 
   <header class="site-header">
@@ -20,8 +21,8 @@
         <img src="assets/img/logo.webp" alt="PODS Tailgate logo">
       </a>
       <p class="header-quote">&ldquo;We Never Lose a Tailgate.&rdquo;</p>
-      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
-      <nav class="nav">
+      <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">&#9776;</button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
         <a href="index.html">Home</a>
         <a href="schedule.html">Schedule/Menu</a>
         <a href="photos.html">Photos</a>
@@ -63,14 +64,14 @@
       </div>
     </section>
 
-    <section class="section section--tight" style="background:var(--paper);border-top:1px solid var(--line)">
+    <section class="section section--tight section--paper">
       <div class="wrap" id="support" style="text-align:center"></div>
     </section>
   </main>
 
   <footer class="site-footer">
     <h3>PODS Tailgate</h3>
-    <nav>
+    <nav aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="schedule.html">Schedule/Menu</a>
       <a href="photos.html">Photos</a>

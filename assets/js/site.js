@@ -2,6 +2,7 @@
    Loads JSON from /data and renders whatever hooks exist on the current page. */
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 async function getJSON(path) {
   const res = await fetch(path, { cache: "no-cache" });
@@ -27,19 +28,42 @@ function fmtDate(str) {
 function nextGame(games) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  // soonest game that isn't final and whose date hasn't passed (game day counts)
   const upcoming = games
-    .filter((g) => g.status !== "final" || parseDate(g.date) >= today)
+    .filter((g) => g.status !== "final" && parseDate(g.date) >= today)
     .sort((a, b) => parseDate(a.date) - parseDate(b.date));
   return upcoming[0] || null;
+}
+
+/* "Game day!", "Tomorrow", "12 days out" */
+function countdownLabel(dateStr) {
+  const now = new Date();
+  now.setHours(12, 0, 0, 0);
+  const days = Math.round((parseDate(dateStr) - now) / 86400000);
+  if (days <= 0) return "Game day!";
+  if (days === 1) return "Tomorrow";
+  return `${days} days out`;
 }
 
 /* ---------- mobile nav ---------- */
 function initNav() {
   const toggle = document.querySelector(".nav__toggle");
   const nav = document.querySelector(".nav");
-  if (toggle && nav) {
-    toggle.addEventListener("click", () => nav.classList.toggle("open"));
-  }
+  if (!toggle || !nav) return;
+  const setOpen = (open) => {
+    nav.classList.toggle("open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+  };
+  toggle.addEventListener("click", () => setOpen(!nav.classList.contains("open")));
+  nav.addEventListener("click", (e) => {
+    if (e.target.closest("a")) setOpen(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("open")) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
 }
 
 /* ---------- footer year ---------- */
@@ -99,7 +123,12 @@ function renderThisWeek(site, schedule) {
   }
   const homeAway = ng.home ? "Home — Razorback Gardens" : "Away";
   const loc = ng.home ? site.location.short : "";
-  const when = [fmtDate(ng.date), ng.time && ng.time !== "TBD" ? ng.time : ""].filter(Boolean).join(" · ");
+  const when = [
+    `${DAYS[parseDate(ng.date).getDay()]}, ${fmtDate(ng.date)}`,
+    ng.time && ng.time !== "TBD" ? ng.time : "",
+  ]
+    .filter(Boolean)
+    .join(" · ");
   const vid = site.video && site.video.youtubeId
     ? `<div class="video-wrap">
          <iframe src="https://www.youtube-nocookie.com/embed/${site.video.youtubeId}"
@@ -115,6 +144,7 @@ function renderThisWeek(site, schedule) {
         <span>${when} &middot; ${homeAway}</span>
       </div>
       <div class="gamecard__body">
+        <span class="pill">${countdownLabel(ng.date)}</span>
         <p class="gamecard__matchup">Arkansas <em>vs.</em> ${ng.opponent}</p>
         ${ng.menu ? `<p class="gamecard__menu">Menu: ${ng.menu}${ng.chef ? ` <span>by ${ng.chef}</span>` : ""}</p>` : ""}
         ${renderPreview(ng.preview)}
@@ -149,8 +179,9 @@ function renderSchedule(schedule) {
       const gallery = g.gallery
         ? `<a href="photos.html#${g.gallery}">View photos &rarr;</a>`
         : "";
+      const isPast = g.status === "final";
       return `
-        <div class="game-row${isNext ? " game-row--next" : ""}">
+        <div class="game-row${isNext ? " game-row--next" : ""}${isPast ? " game-row--past" : ""}">
           <div class="game-row__date">
             <span>${MONTHS[dt.getMonth()]}</span>
             <b>${dt.getDate()}</b>
@@ -160,7 +191,7 @@ function renderSchedule(schedule) {
             <b>Arkansas vs. ${g.opponent}</b>
             <span>${g.time && g.time !== "TBD" ? `${g.time} &middot; ` : ""}${g.menu ? `Menu: ${g.menu}` : "Menu TBA"}${g.chef ? ` &middot; by ${g.chef}` : ""}</span>
           </div>
-          <div class="game-row__tag">${tag}${gallery ? `<br>${gallery}` : ""}</div>
+          <div class="game-row__tag">${isNext ? `<span class="pill">Next up</span>` : tag}${gallery ? `<br>${gallery}` : ""}</div>
         </div>`;
     })
     .join("");
@@ -239,7 +270,7 @@ function renderSponsors(site) {
     return;
   }
   const tile = (s) => {
-    const safe = s.name.replace(/"/g, "&quot;");
+    const safe = s.name.replace(/"/g, "&quot;").replace(/'/g, "\\'");
     const inner = s.image
       ? `<img src="${s.image}" alt="${safe}" loading="lazy"
            onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'sponsorbar__name',textContent:'${safe}'}))">`
@@ -251,19 +282,6 @@ function renderSponsors(site) {
   mount.innerHTML = `
     ${site.sponsorsLabel ? `<span class="sponsorbar__label">${site.sponsorsLabel}</span>` : ""}
     <div class="sponsorbar__logos">${list.map(tile).join("")}</div>`;
-}
-
-/* ---------- video ---------- */
-function renderVideo(site) {
-  const mount = el("video");
-  if (!mount || !site.video || !site.video.youtubeId) return;
-  mount.innerHTML = `
-    <div class="video-wrap">
-      <iframe src="https://www.youtube-nocookie.com/embed/${site.video.youtubeId}"
-        title="${site.video.title || "PODS Tailgate"}" loading="lazy"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
-    </div>`;
 }
 
 /* ---------- boot ---------- */
@@ -288,7 +306,6 @@ function renderVideo(site) {
       renderLogistics(site);
       renderSupport(site);
       renderSponsors(site);
-      renderVideo(site);
     }
     if (schedule) renderSchedule(schedule);
     if (faq) renderFAQ(faq);

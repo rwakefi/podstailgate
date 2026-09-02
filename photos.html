@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9d2235">
   <title>Game Day Photos — PODS Tailgate</title>
   <meta name="description" content="Photos from PODS Tailgate game days in the Razorback Gardens.">
   <link rel="icon" href="assets/img/logo.webp">
@@ -11,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Caveat:wght@600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
-<body data-needs="site">
+<body data-needs="site schedule">
   <div class="announce" id="announce"></div>
 
   <header class="site-header">
@@ -20,8 +21,8 @@
         <img src="assets/img/logo.webp" alt="PODS Tailgate logo">
       </a>
       <p class="header-quote">&ldquo;We Never Lose a Tailgate.&rdquo;</p>
-      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
-      <nav class="nav">
+      <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">&#9776;</button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
         <a href="index.html">Home</a>
         <a href="schedule.html">Schedule/Menu</a>
         <a href="photos.html" aria-current="page">Photos</a>
@@ -40,7 +41,7 @@
 
     <section class="section">
       <div class="wrap">
-        <nav class="gallery-nav" id="gallery-nav"></nav>
+        <nav class="gallery-nav" id="gallery-nav" aria-label="Galleries"></nav>
         <div id="galleries"></div>
       </div>
     </section>
@@ -48,7 +49,7 @@
 
   <footer class="site-footer">
     <h3>PODS Tailgate</h3>
-    <nav>
+    <nav aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="schedule.html">Schedule/Menu</a>
       <a href="photos.html">Photos</a>
@@ -58,7 +59,7 @@
     <p>&copy; <span data-year></span> PODS Tailgate. All rights reserved.</p>
   </footer>
 
-  <div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
     <button class="lightbox__close" aria-label="Close">&times;</button>
     <button class="lightbox__prev" aria-label="Previous">&#8249;</button>
     <button class="lightbox__next" aria-label="Next">&#8250;</button>
