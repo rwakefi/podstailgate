@@ -396,6 +396,49 @@ h3 {
   z-index: 5;
 }
 
+#feature:empty {
+  display: none;
+}
+
+.feature {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: var(--radius);
+  border: 2px solid var(--gold);
+  text-align: center;
+  padding: 26px 22px 30px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow);
+}
+
+.feature__kicker {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.feature__name {
+  font-family: var(--font-script);
+  font-size: clamp(42px, 8vw, 72px);
+  font-weight: 700;
+  line-height: 1.05;
+  color: #fff;
+  margin: 8px 0 14px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.feature__text {
+  max-width: 540px;
+  margin: 0 auto;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--cream);
+}
+
 .gamecard {
   background: var(--paper);
   border-radius: var(--radius);

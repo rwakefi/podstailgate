@@ -7,7 +7,7 @@
     "title": "PODS Tailgate. Let's Party.",
     "text": "Awesome people, unbeatable food, cold drinks, and Razorback pride like no other. Every home game, in the Gardens."
   },
-  "announcement": "",
+  "announcement": "LIVE MUSIC this Saturday: Jack Lindsey at the PODS Tailgate",
   "announcementFallbackFromSchedule": true,
   "location": {
     "short": "Razorback Gardens, directly in front of the Bathroom Pavilion.",
@@ -28,8 +28,13 @@
     "suggested": "Give what feels right — about $10 an adult if you hang out for a while. Kids are always on us. All proceeds fund the tailgate."
   },
   "video": {
-    "youtubeId": "R5L-WttLEPc",
-    "title": "Ryan Silverfield previews Arkansas' season opener vs. North Alabama"
+    "youtubeId": "",
+    "title": ""
+  },
+  "feature": {
+    "kicker": "Live Music This Saturday",
+    "title": "Jack Lindsey",
+    "text": "Up-and-coming country music star Jack Lindsey is playing the PODS Tailgate this week. Arkansas vs. Tulsa. Don't miss it."
   },
   "award": {
     "image": "assets/img/tailgate-of-the-week.webp",

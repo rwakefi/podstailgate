@@ -95,6 +95,31 @@ function renderAnnounce(site, schedule) {
   bar.textContent = text;
 }
 
+function escapeHTML(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+/* ---------- homepage feature / callout ---------- */
+function renderFeature(site) {
+  const mount = el("feature");
+  if (!mount) return;
+  const f = site.feature || {};
+  if (!f.title && !f.text) {
+    mount.replaceChildren();
+    return;
+  }
+  mount.innerHTML = `
+    <div class="feature">
+      ${f.kicker ? `<p class="feature__kicker">${escapeHTML(f.kicker)}</p>` : ""}
+      ${f.title ? `<p class="feature__name">${escapeHTML(f.title)}</p>` : ""}
+      ${f.text ? `<p class="feature__text">${escapeHTML(f.text)}</p>` : ""}
+    </div>`;
+}
+
 /* preview: a string or an array of paragraphs */
 function renderPreview(preview) {
   if (!preview) return "";
@@ -147,6 +172,7 @@ function renderThisWeek(site, schedule) {
         <span class="pill">${countdownLabel(ng.date)}</span>
         <p class="gamecard__matchup">Arkansas <em>vs.</em> ${ng.opponent}</p>
         ${ng.menu ? `<p class="gamecard__menu">Menu: ${ng.menu}${ng.chef ? ` <span>by ${ng.chef}</span>` : ""}</p>` : ""}
+        ${site.feature && site.feature.title ? `<p class="gamecard__menu">Live music: ${escapeHTML(site.feature.title)}</p>` : ""}
         ${renderPreview(ng.preview)}
         ${loc ? `<p class="muted">${loc}</p>` : ""}
         <a class="btn" href="schedule.html">Full schedule &amp; menus</a>
@@ -314,6 +340,7 @@ function renderSponsors(site) {
     if (site) {
       renderHero(site);
       renderAnnounce(site, schedule);
+      renderFeature(site);
       renderThisWeek(site, schedule);
       renderLogistics(site);
       renderSupport(site);
