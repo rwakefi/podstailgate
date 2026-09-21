@@ -7,7 +7,7 @@
     "title": "PODS Tailgate. Let's Party.",
     "text": "Awesome people, unbeatable food, cold drinks, and Razorback pride like no other. Every home game, in the Gardens."
   },
-  "announcement": "LIVE MUSIC this Saturday: Jack Lindsey at the PODS Tailgate",
+  "announcement": "LIVE MUSIC Saturday at 4:00: Jack Lindsey at the PODS Tailgate",
   "announcementFallbackFromSchedule": true,
   "location": {
     "short": "Razorback Gardens, directly in front of the Bathroom Pavilion.",
@@ -34,7 +34,7 @@
   "feature": {
     "kicker": "Live Music This Saturday",
     "title": "Jack Lindsey",
-    "text": "Up-and-coming country music star Jack Lindsey is playing the PODS Tailgate this week. Arkansas vs. Tulsa. Don't miss it."
+    "text": "Up-and-coming country music star Jack Lindsey is playing the PODS Tailgate this week. Music starts at 4:00 — three hours before kickoff. Arkansas vs. Tulsa. Don't miss it."
   },
   "award": {
     "image": "assets/img/tailgate-of-the-week.webp",

@@ -389,11 +389,19 @@ h3 {
   flex-wrap: wrap;
 }
 
+body.has-feature .hero {
+  padding: 56px 22px 150px;
+}
+
 /* this-week card */
 .thisweek {
   margin-top: -68px;
   position: relative;
   z-index: 5;
+}
+
+body.has-feature .thisweek {
+  margin-top: -118px;
 }
 
 #feature:empty {
@@ -406,27 +414,33 @@ h3 {
   border-radius: var(--radius);
   border: 2px solid var(--gold);
   text-align: center;
-  padding: 26px 22px 30px;
   margin-bottom: 22px;
   box-shadow: var(--shadow);
+  overflow: hidden;
 }
 
-.feature__kicker {
+.feature__bar {
+  background: var(--gold);
+  color: var(--ink);
   font-family: var(--font-display);
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--gold);
+  font-weight: 700;
+  padding: 12px 16px;
+}
+
+.feature__body {
+  padding: 22px 22px 28px;
 }
 
 .feature__name {
   font-family: var(--font-script);
-  font-size: clamp(42px, 8vw, 72px);
+  font-size: clamp(48px, 9vw, 84px);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 0.95;
   color: #fff;
-  margin: 8px 0 14px;
+  margin: 0 0 16px;
   text-transform: none;
   letter-spacing: 0;
 }
@@ -437,6 +451,24 @@ h3 {
   font-size: 18px;
   font-weight: 500;
   color: var(--cream);
+}
+
+@media (max-width: 620px) {
+  body.has-feature .hero {
+    padding: 40px 18px 130px;
+  }
+
+  body.has-feature .thisweek {
+    margin-top: -96px;
+  }
+
+  .feature__name {
+    font-size: clamp(40px, 12vw, 56px);
+  }
+
+  .feature__text {
+    font-size: 16px;
+  }
 }
 
 .gamecard {
