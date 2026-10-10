@@ -42,19 +42,27 @@
       "home": true,
       "time": "7:00 PM",
       "menu": "Chicken Finger Saturday",
-      "status": "upcoming",
-      "result": "",
+      "status": "final",
+      "result": "W 34-6",
       "gallery": ""
     },
     {
       "date": "2026-10-10",
       "opponent": "Tennessee",
       "home": true,
-      "time": "TBD",
+      "time": "3:15 PM",
       "menu": "Vinny's Cajun Feast",
       "status": "upcoming",
       "result": "",
-      "gallery": ""
+      "gallery": "",
+      "preview": [
+        "Welcome back to Fayetteville, Tennessee.",
+        "And welcome to the whole damn Pierce Family!",
+        "No. 15 Tennessee comes to the Hill at 3:15 on SEC Network. The Hogs are 2-3, coming off a 34-6 win over Tulsa and a 34-7 loss at Texas A&M. Vegas has the Vols by about 13.",
+        "The last time Tennessee played in Fayetteville, in 2024, the Hogs knocked off a top-5 Vols team that went on to make the Playoff. Last year in Knoxville, Tennessee got it back, 34-31. Tennessee is coming off a 24-14 win over Auburn.",
+        "A late-afternoon kickoff means plenty of tailgate time. Come hungry.",
+        "Tailgate starts at 11:00. Kickoff 3:15. Menu's Vinny's Cajun Feast."
+      ]
     },
     {
       "date": "2026-10-31",
