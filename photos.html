@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9d2235">
   <title>Game Day Photos — PODS Tailgate</title>
-  <meta name="description" content="Photos from PODS Tailgate game days in the Razorback Gardens.">
+  <meta name="description" content="The PODS Tailgate photo album — tailgate photos and game-day galleries from the Razorback Gardens.">
   <link rel="icon" href="assets/img/logo.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,12 +36,34 @@
   <main>
     <section class="page-hero">
       <h1>Game Day Photos</h1>
-      <p>Got a good one? Send it our way and we'll add it to the gallery.</p>
+      <p>The album from the Gardens. Everyone's pictures, not just ours.</p>
+      <a class="btn btn--ghost-light" href="#tailgate-photos">Add a photo</a>
     </section>
 
     <section class="section">
-      <div class="wrap">
+      <div class="wrap" id="photo-album">
         <nav class="gallery-nav" id="gallery-nav" aria-label="Galleries"></nav>
+
+        <section class="gallery-group album" id="tailgate-photos">
+          <h2>Tailgate Photos</h2>
+          <p class="muted" id="fan-blurb">Pictures from the people who were there. Add yours from your phone.</p>
+
+          <div class="album-drop" id="album-drop">
+            <input id="album-file" type="file" accept="image/*" multiple hidden>
+            <input id="album-camera-input" type="file" accept="image/*" capture="environment" hidden>
+            <p class="album-drop__title">Drop photos here</p>
+            <p class="album-drop__hint">or pick them from your phone</p>
+            <div class="album-drop__actions">
+              <button type="button" class="btn" id="album-pick">Choose photos</button>
+              <button type="button" class="btn btn--ghost" id="album-camera">Take a photo</button>
+            </div>
+            <p class="album-drop__meta" id="album-meta">JPG, PNG, or HEIC &middot; up to 12 MB each &middot; 8 at a time</p>
+          </div>
+          <p class="album-status" id="album-status" hidden></p>
+          <div class="album-queue" id="album-queue" hidden></div>
+          <div class="gallery" id="fan-gallery"></div>
+        </section>
+
         <div id="galleries"></div>
       </div>
     </section>

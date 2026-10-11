@@ -1,0 +1,11 @@
+{
+  "note": "Tailgate Photos on the Photos page. Unsigned Cloudinary uploads — cloudName and uploadPreset are public by design (no API secret here).",
+  "cloudName": "veftgifk",
+  "uploadPreset": "pods_fan_photos",
+  "tag": "pods-fan",
+  "folder": "pods-tailgate/fan",
+  "maxMB": 10,
+  "maxFiles": 8,
+  "title": "Tailgate Photos",
+  "blurb": "Pictures from the people who were there. Add yours from your phone."
+}

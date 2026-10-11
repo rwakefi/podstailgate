@@ -14,7 +14,8 @@ Pages redeploys in about a minute.
 | `data/site.json` | Hero text, announcement bar, location, parking, Venmo (+ QR), sponsor bar, YouTube video, award image |
 | `data/schedule.json` | Every game: date, time, opponent, menu, result, and the "Next Tailgate" card on the home page |
 | `data/faq.json` | The FAQ list (shown on both the home page and the About page) |
-| `data/galleries.json` | Photo galleries on the Photos page |
+| `data/galleries.json` | Curated game-day galleries on the Photos page |
+| `data/album.json` | Tailgate Photos shared album (Cloudinary cloud name + unsigned preset) |
 
 ### Sponsor bar
 
@@ -73,6 +74,37 @@ If left empty and `"announcementFallbackFromSchedule"` is `true`, the bar auto-s
 Photo order is the order in the `photos` array. New files from the script are
 appended to the end; reorder by hand if you care.
 
+### Tailgate Photos (guest uploads)
+
+The Photos page has a **Tailgate Photos** album where anyone can add a picture from
+their phone. GitHub Pages can't store uploads itself, so this uses a free
+[Cloudinary](https://cloudinary.com) account (the usual plugin for a static
+site). Images stay in your Cloudinary Media Library — you can delete anything
+that shouldn't be there.
+
+One-time setup (~5 minutes):
+
+1. Create a free account at <https://cloudinary.com/users/register/free>.
+2. Copy your **Cloud name** from the dashboard (looks like `dxxxxabc`).
+3. **Settings → Upload → Upload presets → Add upload preset**
+   - Signing mode: **Unsigned**
+   - Preset name: `pods_fan_photos`
+   - Folder: `pods-tailgate/fan`
+   - Tags: `pods-fan`
+   - Unique filename: on
+   - Overwrite: off
+   - Save.
+4. **Settings → Security**
+   - Enable **Resource list** (so the site can list photos by tag). Allow listing for **Image**.
+   - Save.
+5. Paste the cloud name into `data/album.json` as `"cloudName"`. Leave
+   `"uploadPreset": "pods_fan_photos"` unless you named the preset something else.
+6. Commit and push. Guest photos show up on the Photos page without another deploy.
+
+Unsigned presets are meant to live in the browser (no API secret on the site).
+If the album ever gets spam, turn the preset off in Cloudinary and the upload
+box stops working.
+
 ## Local preview
 
 No server needed for most things, but `fetch()` of the JSON files requires HTTP.
@@ -91,7 +123,7 @@ index.html schedule.html photos.html about.html 404.html
 CNAME
 assets/css/site.css
 assets/js/site.js       # shared: nav, announcement, this-week card, schedule, faq
-assets/js/gallery.js    # photos page: gallery render + lightbox
+assets/js/gallery.js    # photos page: galleries, fan album uploads, lightbox
 assets/img/             # logo, backgrounds, map, parking, sponsor, award
 data/*.json             # editable content
 photos/<slug>/          # gallery images
