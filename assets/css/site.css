@@ -1310,8 +1310,8 @@ body.theme-halloween .feature__bar {
 }
 
 body.theme-halloween .feature__name {
-  color: var(--gold);
-  text-shadow: 0 0 18px rgba(255, 120, 20, 0.4);
+  color: #f4e9d8;
+  text-shadow: 0 2px 14px rgba(255, 159, 28, 0.22);
 }
 
 body.theme-halloween .gamecard__top {
