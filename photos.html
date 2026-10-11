@@ -49,15 +49,19 @@
           <p class="muted" id="fan-blurb">Pictures from the people who were there. Add yours from your phone.</p>
 
           <div class="album-drop" id="album-drop">
-            <input id="album-file" type="file" accept="image/*" multiple hidden>
-            <input id="album-camera-input" type="file" accept="image/*" capture="environment" hidden>
             <p class="album-drop__title">Drop photos here</p>
             <p class="album-drop__hint">or pick them from your phone</p>
             <div class="album-drop__actions">
-              <button type="button" class="btn" id="album-pick">Choose photos</button>
-              <button type="button" class="btn btn--ghost" id="album-camera">Take a photo</button>
+              <label class="album-filebtn">
+                <input id="album-file" class="album-filebtn__input" type="file" accept="image/*,image/heic,image/heif,.heic,.heif" multiple>
+                <span class="btn">Choose photos</span>
+              </label>
+              <label class="album-filebtn">
+                <input id="album-camera-input" class="album-filebtn__input" type="file" accept="image/*,image/heic,image/heif,.heic,.heif" capture="environment">
+                <span class="btn btn--ghost">Take a photo</span>
+              </label>
             </div>
-            <p class="album-drop__meta" id="album-meta">JPG, PNG, or HEIC &middot; up to 12 MB each &middot; 8 at a time</p>
+            <p class="album-drop__meta" id="album-meta">JPG, PNG, or HEIC &middot; up to 10 MB each &middot; 8 at a time</p>
           </div>
           <p class="album-status" id="album-status" hidden></p>
           <div class="album-queue" id="album-queue" hidden></div>

@@ -15,9 +15,6 @@
     return `${MONTHS[(m || 1) - 1]} ${d}, ${y}`;
   };
 
-  const EXT_OK = /\.(jpe?g|png|webp|gif|heic|heif)$/i;
-  const MIME_OK = /^image\/(jpeg|jpg|pjpeg|png|webp|gif|heic|heif)$/i;
-
   let galleriesData;
   let albumCfg = null;
   try {
@@ -221,8 +218,7 @@
   const drop = document.getElementById("album-drop");
   const fileInput = document.getElementById("album-file");
   const cameraInput = document.getElementById("album-camera-input");
-  const pickBtn = document.getElementById("album-pick");
-  const cameraBtn = document.getElementById("album-camera");
+  const fileBtns = drop ? drop.querySelectorAll(".album-filebtn") : [];
   const statusEl = document.getElementById("album-status");
   const queueEl = document.getElementById("album-queue");
   const metaEl = document.getElementById("album-meta");
@@ -242,8 +238,7 @@
 
   if (!albumReady) {
     if (drop) drop.classList.add("is-pending");
-    if (pickBtn) pickBtn.disabled = true;
-    if (cameraBtn) cameraBtn.disabled = true;
+    fileBtns.forEach((el) => el.classList.add("is-disabled"));
     if (metaEl) {
       metaEl.textContent = "The shared album is almost ready — browse the galleries below in the meantime.";
     }
@@ -253,10 +248,9 @@
 
   function fileOk(file) {
     const named = file.name || "photo";
-    if (file.type && !MIME_OK.test(file.type) && !file.type.startsWith("image/")) {
+    if (file.type && !file.type.startsWith("image/")) {
       return `${named}: not an image`;
     }
-    if (!file.type && !EXT_OK.test(named)) return `${named}: not an image`;
     if (file.size > maxMB * 1024 * 1024) return `${named}: over ${maxMB} MB`;
     return "";
   }
@@ -343,8 +337,6 @@
     if (cameraInput) cameraInput.value = "";
   }
 
-  if (pickBtn && fileInput) pickBtn.addEventListener("click", () => fileInput.click());
-  if (cameraBtn && cameraInput) cameraBtn.addEventListener("click", () => cameraInput.click());
   if (fileInput) fileInput.addEventListener("change", () => handleFiles(fileInput.files || []));
   if (cameraInput) cameraInput.addEventListener("change", () => handleFiles(cameraInput.files || []));
 
