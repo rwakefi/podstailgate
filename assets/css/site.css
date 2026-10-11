@@ -1159,3 +1159,168 @@ body.has-feature .thisweek {
     columns: 1;
   }
 }
+
+/* ---------- feature: event list (used by special editions) ---------- */
+.feature__events {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  max-width: 760px;
+  margin: 22px auto 0;
+}
+
+.feature__events li {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 14px 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  display: grid;
+  gap: 4px;
+}
+
+.feature__events b {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 16px;
+  color: var(--gold);
+}
+
+.feature__events span {
+  font-size: 15.5px;
+  color: var(--cream);
+}
+
+/* =========================================================
+   HALLOWEEN EDITION
+   Switched on by an "edition": { "theme": "halloween" } on the
+   next game in data/schedule.json. Turns off by itself after.
+   ========================================================= */
+body.theme-halloween {
+  --cardinal: #d9581a;
+  --cardinal-dark: #a8410f;
+  --gold: #ff9f1c;
+  --ink: #15101b;
+  --purple: #4c206e;
+  --font-spooky: "Creepster", var(--font-display);
+}
+
+body.theme-halloween .site-header {
+  background: var(--ink);
+  border-bottom-color: var(--cardinal);
+}
+
+body.theme-halloween .announce {
+  background: var(--purple);
+}
+
+body.theme-halloween .hero,
+body.theme-halloween .page-hero {
+  background:
+    linear-gradient(rgba(21, 16, 27, 0.78), rgba(76, 32, 110, 0.9)),
+    url("../img/hog-pattern.jpg") center / cover no-repeat;
+}
+
+body.theme-halloween .hero {
+  overflow: hidden;
+}
+
+body.theme-halloween .hero h1,
+body.theme-halloween .page-hero h1 {
+  font-family: var(--font-spooky);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--gold);
+  text-shadow: 0 0 22px rgba(255, 120, 20, 0.45), 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* little bat flock drifting across the hero */
+body.theme-halloween .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.85;
+  background-repeat: no-repeat;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 20'%3E%3Cpath fill='%23000' d='M20 6c1-2 2-3 3-3l1 2c2-3 6-4 9-2 2 1 4 4 7 4-3 1-5 3-6 6-2-2-5-2-7 0-1-2-3-2-4-1l-3 4-3-4c-1-1-3-1-4 1-2-2-5-2-7 0-1-3-3-5-6-6 3 0 5-3 7-4 3-2 7-1 9 2l1-2c1 0 2 1 3 3z'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 20'%3E%3Cpath fill='%23000' d='M20 6c1-2 2-3 3-3l1 2c2-3 6-4 9-2 2 1 4 4 7 4-3 1-5 3-6 6-2-2-5-2-7 0-1-2-3-2-4-1l-3 4-3-4c-1-1-3-1-4 1-2-2-5-2-7 0-1-3-3-5-6-6 3 0 5-3 7-4 3-2 7-1 9 2l1-2c1 0 2 1 3 3z'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 20'%3E%3Cpath fill='%23000' d='M20 6c1-2 2-3 3-3l1 2c2-3 6-4 9-2 2 1 4 4 7 4-3 1-5 3-6 6-2-2-5-2-7 0-1-2-3-2-4-1l-3 4-3-4c-1-1-3-1-4 1-2-2-5-2-7 0-1-3-3-5-6-6 3 0 5-3 7-4 3-2 7-1 9 2l1-2c1 0 2 1 3 3z'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 20'%3E%3Cpath fill='%23000' d='M20 6c1-2 2-3 3-3l1 2c2-3 6-4 9-2 2 1 4 4 7 4-3 1-5 3-6 6-2-2-5-2-7 0-1-2-3-2-4-1l-3 4-3-4c-1-1-3-1-4 1-2-2-5-2-7 0-1-3-3-5-6-6 3 0 5-3 7-4 3-2 7-1 9 2l1-2c1 0 2 1 3 3z'/%3E%3C/svg%3E");
+  background-size: 64px 32px, 40px 20px, 52px 26px, 30px 15px;
+  background-position: 8% 18%, 22% 34%, 86% 14%, 74% 30%;
+  animation: bats-drift 7s ease-in-out infinite alternate;
+}
+
+/* glowing harvest moon behind the headline */
+body.theme-halloween .hero::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: 6%;
+  top: 6%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #ffd28a, #ff9f1c 55%, rgba(255, 159, 28, 0) 72%);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.theme-halloween .hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes bats-drift {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(18px, -10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.theme-halloween .hero::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 620px) {
+  body.theme-halloween .hero::after {
+    width: 130px;
+    height: 130px;
+    right: -20px;
+    top: 10px;
+  }
+}
+
+body.theme-halloween .feature {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 159, 28, 0.16), transparent 60%),
+    var(--ink);
+  border-color: var(--cardinal);
+}
+
+body.theme-halloween .feature__bar {
+  background: linear-gradient(90deg, var(--cardinal), var(--gold));
+  color: var(--ink);
+}
+
+body.theme-halloween .feature__name {
+  font-family: var(--font-spooky);
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 18px rgba(255, 120, 20, 0.4);
+}
+
+body.theme-halloween .gamecard__top {
+  background: var(--purple);
+}
+
+body.theme-halloween .site-footer {
+  background: var(--ink);
+}

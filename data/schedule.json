@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "note": "Edit this file to add games. Each game: date (YYYY-MM-DD), opponent, home (true/false), time (kickoff or tailgate window, or \"TBD\"), menu, chef (optional), status (upcoming|final), result (optional, e.g. \"W 24-17\"), preview (optional; shown on the home page when this is the next game — a single string, or an array of strings for multiple paragraphs; the first paragraph renders as a centered bold lead-in), gallery (optional slug that matches an entry in galleries.json).",
+  "note": "Edit this file to add games. Each game: date (YYYY-MM-DD), opponent, home (true/false), time (kickoff or tailgate window, or \"TBD\"), menu, chef (optional), status (upcoming|final), result (optional, e.g. \"W 24-17\"), preview (optional; shown on the home page when this is the next game — a single string, or an array of strings for multiple paragraphs; the first paragraph renders as a centered bold lead-in), gallery (optional slug that matches an entry in galleries.json). edition (optional; a special look for one game only, e.g. {\"theme\":\"halloween\", \"label\", \"font\", \"themeColor\", \"headerQuote\", \"hero\":{...}, \"announcement\", \"feature\":{kicker,title,text,events:[{title,text}]}}). It applies only while that game is the next tailgate, then the site reverts to normal automatically.",
   "games": [
     {
       "date": "2026-09-05",
@@ -73,7 +73,45 @@
       "menu": "Chili Cook-Off & Costume Contest",
       "status": "upcoming",
       "result": "",
-      "gallery": ""
+      "gallery": "",
+      "preview": [
+        "Trick or treat, Mizzou.",
+        "It's Halloween and it's Homecoming, and the Tigers are in town. Missouri's been in the SEC since 2012 and still can't decide if it's the South or the Midwest. Maybe they can figure it out on the drive home.",
+        "Wear a costume. The best ones win prizes. Bring an appetite for the chili cook-off, and stick around for live music from Dakota Bogan.",
+        "Kickoff time is still TBA. We'll post it as soon as the SEC makes up its mind."
+      ],
+      "edition": {
+        "theme": "halloween",
+        "label": "Halloween Edition",
+        "font": "Creepster",
+        "themeColor": "#15101b",
+        "headerQuote": "We Never Lose a Tailgate. Boo.",
+        "hero": {
+          "eyebrow": "Halloween Edition · Razorback Gardens",
+          "title": "PODS Tailgate. Spooky Season.",
+          "text": "Costumes, chili, and live music. Halloween in the Gardens, Arkansas vs. Missouri."
+        },
+        "announcement": "Halloween Edition: Costume party, chili cook-off & live music by Dakota Bogan",
+        "feature": {
+          "kicker": "Halloween at the PODS Tailgate",
+          "title": "Dakota Bogan",
+          "text": "Live music in the Gardens on Halloween. Come in costume.",
+          "events": [
+            {
+              "title": "Costume Party",
+              "text": "Dress up. The best costumes win prizes."
+            },
+            {
+              "title": "Chili Cook-Off",
+              "text": "Grab a spoon. Bragging rights on the line."
+            },
+            {
+              "title": "Live Music",
+              "text": "Dakota Bogan, live at the tailgate."
+            }
+          ]
+        }
+      }
     },
     {
       "date": "2026-11-14",

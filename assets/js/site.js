@@ -103,6 +103,41 @@ function escapeHTML(str) {
     .replace(/"/g, "&quot;");
 }
 
+/* ---------- special editions ----------
+   A game in schedule.json can carry an "edition" object (e.g. Halloween).
+   While that game is the next tailgate, the edition re-themes every page and
+   overrides the hero / announcement / feature. Once the game passes, the next
+   game has no edition and the site falls back to the standard look on its own. */
+function applyEdition(site, schedule) {
+  const ng = schedule ? nextGame(schedule.games || []) : null;
+  const ed = ng && ng.edition;
+  if (!ed) return site;
+  if (ed.theme) {
+    document.body.classList.add(`theme-${ed.theme}`);
+    if (ed.font && !document.getElementById("edition-font")) {
+      const link = document.createElement("link");
+      link.id = "edition-font";
+      link.rel = "stylesheet";
+      link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(ed.font)}&display=swap`;
+      document.head.appendChild(link);
+    }
+    if (ed.themeColor) {
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", ed.themeColor);
+    }
+  }
+  if (ed.headerQuote) {
+    document.querySelectorAll(".header-quote").forEach((n) => (n.textContent = ed.headerQuote));
+  }
+  if (!site) return site;
+  return {
+    ...site,
+    hero: { ...(site.hero || {}), ...(ed.hero || {}) },
+    announcement: ed.announcement != null ? ed.announcement : site.announcement,
+    feature: ed.feature || site.feature,
+  };
+}
+
 /* ---------- homepage feature / callout ---------- */
 function renderFeature(site) {
   const mount = el("feature");
@@ -113,12 +148,23 @@ function renderFeature(site) {
     document.body.classList.remove("has-feature");
     return;
   }
+  const events = Array.isArray(f.events) && f.events.length
+    ? `<ul class="feature__events">${f.events
+        .map(
+          (ev) => `<li>
+            ${ev.title ? `<b>${escapeHTML(ev.title)}</b>` : ""}
+            ${ev.text ? `<span>${escapeHTML(ev.text)}</span>` : ""}
+          </li>`
+        )
+        .join("")}</ul>`
+    : "";
   mount.innerHTML = `
     <div class="feature">
       ${f.kicker ? `<p class="feature__bar">${escapeHTML(f.kicker)}</p>` : ""}
       <div class="feature__body">
         ${f.title ? `<p class="feature__name">${escapeHTML(f.title)}</p>` : ""}
         ${f.text ? `<p class="feature__text">${escapeHTML(f.text)}</p>` : ""}
+        ${events}
       </div>
     </div>`;
   document.body.classList.add("has-feature");
@@ -169,7 +215,7 @@ function renderThisWeek(site, schedule) {
   mount.innerHTML = `
     <div class="gamecard">
       <div class="gamecard__top">
-        <span>Next Tailgate</span>
+        <span>${ng.edition && ng.edition.label ? escapeHTML(ng.edition.label) : "Next Tailgate"}</span>
         <span>${when} &middot; ${homeAway}</span>
       </div>
       <div class="gamecard__body">
@@ -334,11 +380,13 @@ function renderSponsors(site) {
   const want = (n) => needs.includes(n);
 
   try {
-    const [site, schedule, faq] = await Promise.all([
+    const [rawSite, schedule, faq] = await Promise.all([
       want("site") ? getJSON("data/site.json") : null,
       want("schedule") ? getJSON("data/schedule.json") : null,
       want("faq") ? getJSON("data/faq.json") : null,
     ]);
+
+    const site = applyEdition(rawSite, schedule);
 
     if (site) {
       renderHero(site);
