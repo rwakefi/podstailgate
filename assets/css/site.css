@@ -1310,10 +1310,7 @@ body.theme-halloween .feature__bar {
 }
 
 body.theme-halloween .feature__name {
-  font-family: var(--font-spooky);
-  font-weight: 400;
   color: var(--gold);
-  letter-spacing: 0.02em;
   text-shadow: 0 0 18px rgba(255, 120, 20, 0.4);
 }
 
