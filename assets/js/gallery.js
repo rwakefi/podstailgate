@@ -222,6 +222,10 @@
   const statusEl = document.getElementById("album-status");
   const queueEl = document.getElementById("album-queue");
   const metaEl = document.getElementById("album-meta");
+  const stageEl = document.getElementById("album-stage");
+  const previewsEl = document.getElementById("album-previews");
+  const sendBtn = document.getElementById("album-send");
+  const clearBtn = document.getElementById("album-clear");
 
   function setStatus(msg, kind) {
     if (!statusEl) return;
@@ -279,6 +283,74 @@
     return el;
   }
 
+  let staged = [];
+  let stagedUrls = [];
+  let sending = false;
+
+  function fileKey(file) {
+    return [file.name || "photo", file.size, file.lastModified].join("|");
+  }
+
+  function clearStage() {
+    stagedUrls.forEach((url) => URL.revokeObjectURL(url));
+    stagedUrls = [];
+    staged = [];
+    if (stageEl) stageEl.hidden = true;
+    if (previewsEl) previewsEl.innerHTML = "";
+    if (fileInput) fileInput.value = "";
+    if (cameraInput) cameraInput.value = "";
+  }
+
+  function renderStage() {
+    if (!stageEl || !previewsEl) return;
+    stagedUrls.forEach((url) => URL.revokeObjectURL(url));
+    stagedUrls = [];
+    previewsEl.innerHTML = "";
+    if (!staged.length) {
+      stageEl.hidden = true;
+      return;
+    }
+    stageEl.hidden = false;
+    staged.forEach((file) => {
+      const url = URL.createObjectURL(file);
+      stagedUrls.push(url);
+      const img = document.createElement("img");
+      img.src = url;
+      img.alt = file.name || "Selected photo";
+      previewsEl.appendChild(img);
+    });
+    if (sendBtn) {
+      sendBtn.textContent = staged.length === 1 ? "Add to album" : `Add ${staged.length} to album`;
+    }
+    setStatus("Looks good? Tap Add to album.", "");
+  }
+
+  function stageFiles(list) {
+    if (sending) return;
+    const incoming = [...(list || [])].filter(Boolean);
+    if (!incoming.length) return;
+    incoming.forEach((file) => {
+      if (staged.length >= maxFiles) return;
+      const key = fileKey(file);
+      if (staged.some((item) => fileKey(item) === key)) return;
+      const reason = fileOk(file);
+      if (reason) {
+        setStatus(reason, "err");
+        return;
+      }
+      staged.push(file);
+    });
+    renderStage();
+  }
+
+  function harvestInputs() {
+    if (sending) return;
+    const batch = [];
+    if (fileInput && fileInput.files && fileInput.files.length) batch.push(...fileInput.files);
+    if (cameraInput && cameraInput.files && cameraInput.files.length) batch.push(...cameraInput.files);
+    if (batch.length) stageFiles(batch);
+  }
+
   async function handleFiles(list) {
     if (!albumReady) {
       setStatus("The shared album isn't connected yet. Hang tight.", "err");
@@ -301,6 +373,7 @@
       ok.forEach((f) => queueEl.appendChild(chip(f.name || "photo", "wait")));
     }
 
+    sending = true;
     drop.classList.add("is-busy");
     setStatus(ok.length ? `Uploading ${ok.length} photo${ok.length === 1 ? "" : "s"}…` : "", ok.length ? "" : "err");
 
@@ -328,17 +401,37 @@
     }
 
     drop.classList.remove("is-busy");
+    sending = false;
     const bits = [];
     if (done) bits.push(`${done} added to the album`);
     if (failed) bits.push(`${failed} didn't go through`);
     if (skipped.length) bits.push(skipped[0]);
     setStatus(bits.join(". ") + ".", done && !failed ? "ok" : failed ? "err" : "");
-    if (fileInput) fileInput.value = "";
-    if (cameraInput) cameraInput.value = "";
+    clearStage();
   }
 
-  if (fileInput) fileInput.addEventListener("change", () => handleFiles(fileInput.files || []));
-  if (cameraInput) cameraInput.addEventListener("change", () => handleFiles(cameraInput.files || []));
+  ["change", "input"].forEach((ev) => {
+    if (fileInput) fileInput.addEventListener(ev, () => stageFiles(fileInput.files || []));
+    if (cameraInput) cameraInput.addEventListener(ev, () => stageFiles(cameraInput.files || []));
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") harvestInputs();
+  });
+  window.addEventListener("focus", harvestInputs);
+  window.addEventListener("pageshow", harvestInputs);
+
+  if (sendBtn) {
+    sendBtn.addEventListener("click", () => {
+      if (!staged.length) return;
+      handleFiles(staged.slice());
+    });
+  }
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      clearStage();
+      setStatus("");
+    });
+  }
 
   if (drop) {
     ["dragenter", "dragover"].forEach((ev) => {
@@ -355,7 +448,7 @@
     });
     drop.addEventListener("drop", (e) => {
       const files = e.dataTransfer && e.dataTransfer.files;
-      if (files && files.length) handleFiles(files);
+      if (files && files.length) stageFiles(files);
     });
   }
 

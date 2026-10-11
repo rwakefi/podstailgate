@@ -1077,6 +1077,45 @@ body.has-feature .thisweek {
   font-size: 13px;
 }
 
+.album-stage {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.album-stage[hidden] {
+  display: none;
+}
+
+.album-stage__previews {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.album-stage__previews img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.album-stage__go {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.album-stage #album-send {
+  min-width: 220px;
+  padding: 14px 28px;
+  font-size: 16px;
+}
+
 .album-status {
   text-align: center;
   margin: -8px auto 20px;
