@@ -371,6 +371,83 @@ function renderSponsors(site) {
     <div class="sponsorbar__logos">${list.map(tile).join("")}</div>`;
 }
 
+/* ---------- home photo carousel (below the map) ---------- */
+async function renderHomePhotos() {
+  const section = el("home-photos");
+  const rail = el("photo-rail");
+  if (!section || !rail) return;
+
+  const photos = [];
+  const push = (src, href, alt) => {
+    if (!src) return;
+    photos.push({ src, href, alt: alt || "Tailgate photo" });
+  };
+
+  try {
+    const cfg = await getJSON("data/album.json");
+    if (cfg && cfg.cloudName && cfg.uploadPreset) {
+      const tag = encodeURIComponent(cfg.tag || "pods-fan");
+      const res = await fetch(`https://res.cloudinary.com/${cfg.cloudName}/image/list/${tag}.json`, {
+        cache: "no-cache",
+      });
+      if (res.ok) {
+        const json = await res.json();
+        const resources = (json.resources || []).slice().sort((a, b) => {
+          return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+        });
+        resources.forEach((r, i) => {
+          const v = r.version ? `v${r.version}/` : "";
+          push(
+            `https://res.cloudinary.com/${cfg.cloudName}/image/upload/c_fill,g_auto,w_480,h_600,q_auto,f_auto/${v}${r.public_id}`,
+            "photos.html#tailgate-photos",
+            `Tailgate photo ${i + 1}`
+          );
+        });
+      }
+    }
+  } catch (err) {
+    console.warn("[PODS] home album list failed", err);
+  }
+
+  if (photos.length < 16) {
+    try {
+      const data = await getJSON("data/galleries.json");
+      for (const g of data.galleries || []) {
+        for (const src of g.photos || []) {
+          push(src, `photos.html#${g.slug}`, g.title);
+          if (photos.length >= 24) break;
+        }
+        if (photos.length >= 24) break;
+      }
+    } catch (err) {
+      console.warn("[PODS] home gallery fill failed", err);
+    }
+  }
+
+  if (!photos.length) {
+    section.hidden = true;
+    return;
+  }
+
+  section.hidden = false;
+  rail.innerHTML = photos
+    .slice(0, 24)
+    .map(
+      (p) =>
+        `<a class="photo-rail__item" href="${p.href}"><img src="${p.src}" alt="${p.alt}" loading="lazy"></a>`
+    )
+    .join("");
+
+  const prev = section.querySelector(".photo-rail__nav--prev");
+  const next = section.querySelector(".photo-rail__nav--next");
+  const step = () => {
+    const card = rail.querySelector(".photo-rail__item");
+    return card ? card.getBoundingClientRect().width + 12 : 240;
+  };
+  if (prev) prev.addEventListener("click", () => rail.scrollBy({ left: -step(), behavior: "smooth" }));
+  if (next) next.addEventListener("click", () => rail.scrollBy({ left: step(), behavior: "smooth" }));
+}
+
 /* ---------- boot ---------- */
 (async function boot() {
   initNav();
@@ -402,4 +479,6 @@ function renderSponsors(site) {
   } catch (err) {
     console.error("[PODS] failed to load site data", err);
   }
+
+  renderHomePhotos();
 })();
