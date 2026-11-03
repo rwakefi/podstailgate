@@ -71,8 +71,8 @@
       "home": true,
       "time": "6:45 PM",
       "menu": "Chili Cook-Off & Costume Contest",
-      "status": "upcoming",
-      "result": "",
+      "status": "final",
+      "result": "L 10-34",
       "gallery": "",
       "preview": [
         "Trick or treat, Mizzou.",
@@ -117,11 +117,17 @@
       "date": "2026-11-14",
       "opponent": "South Carolina",
       "home": true,
-      "time": "2:00 – 7:00 PM",
+      "time": "6:45 PM",
       "menu": "All-Tailgate Potluck",
       "status": "upcoming",
       "result": "",
-      "gallery": ""
+      "gallery": "",
+      "preview": [
+        "The Chickens are coming to the Hill.",
+        "South Carolina is 5-3 and has won three straight, including 27-24 over Tennessee, so thanks for that, fellas. The Hogs are 3-5 after Mizzou ruined Halloween 34-10, and they've still got a trip to Auburn before this one.",
+        "Their mascot is a giant chicken named Cocky, and they run out of the tunnel to a techno song from 1999. It's a night game, so we've got all day to practice our clucking.",
+        "Kickoff 6:45. Menu's an All-Tailgate Potluck, so bring a dish. Fried chicken feels right."
+      ]
     },
     {
       "date": "2026-11-28",
