@@ -119,8 +119,8 @@
       "home": true,
       "time": "6:45 PM",
       "menu": "All-Tailgate Potluck",
-      "status": "upcoming",
-      "result": "",
+      "status": "final",
+      "result": "W 34-6",
       "gallery": "",
       "preview": [
         "The Chickens are coming to the Hill.",
@@ -137,7 +137,13 @@
       "menu": "Wakefield Philly Special Cheesesteaks",
       "status": "upcoming",
       "result": "",
-      "gallery": ""
+      "gallery": "",
+      "preview": [
+        "Geaux home, Tigers.",
+        "LSU is 6-4 and has dropped two straight, including letting Texas score with 3 seconds left in their own stadium. The Hogs are 4-6 after smacking No. 20 South Carolina 34-6, and they've still got a trip to Texas before this one.",
+        "Lane Kiffin left Ole Miss for Baton Rouge, then lost to Ole Miss and Kentucky in year one. Bold move. Their fans will roll in dressed like a Mardi Gras float, so be nice. It's been a rough month down there.",
+        "Kickoff time is still TBA (11:00 or 11:45). Menu's Wakefield Philly Special Cheesesteaks."
+      ]
     }
   ]
 }
